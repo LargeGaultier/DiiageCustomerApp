@@ -1,0 +1,29 @@
+name: CI Local Runner
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build-test:
+    runs-on: self-hosted  # Utilise ton runner local
+    env:
+      SA_PASSWORD: ${{ secrets.SA_PASSWORD }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: docker build -t tp3 .
+
+      - name: Lancer docker-compose
+        run: |
+          docker-compose down -v
+          docker-compose up -d
+          sleep 20
+          docker-compose logs web
+
+      - name: Stop containers
+        run: docker-compose down -v
