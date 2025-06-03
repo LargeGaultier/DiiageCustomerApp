@@ -7,6 +7,7 @@ COPY . .
 WORKDIR /src/Caltec.StudentInfoProject.WebUi
 RUN dotnet publish Caltec.StudentInfoProject.WebUi.csproj -c Release -o /app/publish
 
+
 # Runtime
 FROM mcr.microsoft.com/dotnet/aspnet:6.0
 WORKDIR /app
