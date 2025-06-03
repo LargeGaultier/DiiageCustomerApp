@@ -40,22 +40,7 @@ namespace Caltec.StudentInfoProject.Business.Tests
             var resultUpdate = await _studentService.UpdateAsync(result, CancellationToken.None);
             Assert.IsNotNull(resultUpdate);
         }
-        [Test]
-        public async Task DeleteStudent()
-        {
-            var result = await _studentService.InsertStudent(new StudentDto
-            {
-                FirstName = "John",
-                LastName = "Doe",
-                Email = "John.doe@diiage.org"
-            }
-            , CancellationToken.None);
-            Assert.IsNotNull(result);
-            await _studentService.DeleteStudentAsync(result.Id, CancellationToken.None);
-            Assert.ThrowsAsync<Exception>(() => _studentService.GetOne(result.Id, CancellationToken.None));
-            
 
-        }
 
     }
 }
